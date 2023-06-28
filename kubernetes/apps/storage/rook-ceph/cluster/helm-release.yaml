@@ -56,10 +56,6 @@ spec:
         count: 2
       mon:
         count: 3
-      dashboard:
-        enabled: true
-        urlPrefix: /
-        ssl: false
       network:
         provider: host
       crashCollector:
