@@ -34,7 +34,7 @@ spec:
       ssl: false
     ingress:
       dashboard:
-        ingressClassName: "nginx"
+        className: "nginx"
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
         hajimari.io/icon: mdi:rook
