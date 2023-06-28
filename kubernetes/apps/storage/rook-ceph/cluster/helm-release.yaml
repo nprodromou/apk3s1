@@ -35,11 +35,11 @@ spec:
     ingress:
       enabled: true
       className: nginx
-      dashboard:
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          # hajimari.io/icon: mdi:rook
-          external-dns.alpha.kubernetes.io/target: "rook.${SECRET_DOMAIN}"
+      # dashboard:
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        # hajimari.io/icon: mdi:rook
+        external-dns.alpha.kubernetes.io/target: "rook.${SECRET_DOMAIN}"
       hosts:
         - &host "rook.${SECRET_DOMAIN}"
       tls:
