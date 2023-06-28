@@ -33,23 +33,23 @@ spec:
       urlPrefix: /
       ssl: false
     ingress:
-      enabled: true
-      className: nginx
-      # dashboard:
+      dashboard:
+        ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
-        # hajimari.io/icon: mdi:rook
-        # external-dns.alpha.kubernetes.io/target: "rook.${SECRET_DOMAIN}"
-      hosts:
-        - &host "rook.${SECRET_DOMAIN}"
+        hajimari.io/icon: mdi:rook
+        external-dns.alpha.kubernetes.io/target: "rook.${SECRET_DOMAIN}"
+      host:
+        name: &host "rook.${SECRET_DOMAIN}"
+        path: /
       tls:
         - hosts:
             - *host
           secretName: rook-tls
-    configOverride: |
-      [global]
-      bdev_enable_discard = true
-      bdev_async_discard = true
+    # configOverride: |
+    #   [global]
+    #   bdev_enable_discard = true
+    #   bdev_async_discard = true
     cephClusterSpec:
       mgr:
         count: 2
