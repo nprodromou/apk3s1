@@ -22,12 +22,17 @@ spec:
       tag: 1.32.4.7195-7c8f9d3b6
     env:
       TZ: "America/Los_Angeles"
+      ADVERTISE_IP: "http://${LB_PLEX_IP}:32400"
+      ALLOWED_NETWORKS: "10.0.0.0/8"
     service:
       main:
         type: LoadBalancer
         externalIPs:
           - "${LB_PLEX_IP}"
         externalTrafficPolicy: Local
+        ports:
+          http:
+            port: 32400
     ingress:
       main:
         enabled: true
