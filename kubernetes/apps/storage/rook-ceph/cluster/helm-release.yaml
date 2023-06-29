@@ -38,7 +38,7 @@ spec:
         ingressClassName: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-production
-        hajimari.io/icon: mdi:rook
+        # hajimari.io/icon: mdi:rook
         external-dns.alpha.kubernetes.io/target: "rook.${SECRET_DOMAIN}"
       host:
         name: &host "rook.${SECRET_DOMAIN}"
