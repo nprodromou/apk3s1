@@ -50,11 +50,11 @@ spec:
           - hosts:
               - "plex.${SECRET_DOMAIN}"
             secretName: plex-tls
-    # podSecurityContext:
-    #   runAsUser: "${SECRET_UID}"
-    #   runAsGroup: "${SECRET_GID}"
-    #   supplementalGroups:
-    #     - 100
+    podSecurityContext:
+      runAsUser: "${SECRET_UID}"
+      runAsGroup: "${SECRET_GID}"
+      supplementalGroups:
+        - 100
     persistence:
       config:
         enabled: true
