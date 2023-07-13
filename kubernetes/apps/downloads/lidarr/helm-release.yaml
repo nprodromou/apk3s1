@@ -26,8 +26,8 @@ spec:
     global:
       nameOverride: *app
     image:
-      repository: ghcr.io/onedr0p/lidarr-develop
-      tag: 1.1.0.2649@sha256:2abfa356b1edac3ab33be437896fe03e268e8d545a1b0a0bf8e3fd825d587cd7
+      repository: ghcr.io/onedr0p/lidarr
+      tag: 1.2.6.3313
     env:
       TZ: "America/Los_Angeles"
     ingress:
