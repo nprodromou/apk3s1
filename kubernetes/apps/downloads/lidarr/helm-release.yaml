@@ -23,11 +23,9 @@ spec:
     remediation:
       retries: 5
   values:
-    global:
-      nameOverride: *app
     image:
       repository: ghcr.io/onedr0p/lidarr
-      tag: 1.1.4.3027
+      tag: 1.2.6.3313
     env:
       TZ: "America/Los_Angeles"
     ingress:
