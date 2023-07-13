@@ -41,6 +41,12 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "download-box"
           cert-manager.io/cluster-issuer: letsencrypt-production
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            location = / {
+              if ($http_x_plex_device = ""){
+                return 301 $scheme://$host/web/index.html;
+              }
+            }
         hosts:
           - host: &host "plex.${SECRET_DOMAIN}"
             paths:
