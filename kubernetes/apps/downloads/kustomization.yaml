@@ -7,7 +7,7 @@ resources:
   # - calibre-web
   # - doplarr
   # - jellyfin
-  # - lidarr
+  - lidarr
   # - overseerr
   # - plex
   # - prowlarr
