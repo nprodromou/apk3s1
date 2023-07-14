@@ -67,6 +67,8 @@ spec:
     podSecurityContext:
       runAsUser: "${SECRET_UID}"
       runAsGroup: "${SECRET_GID}"
+      fsGroup: "${SECRET_FS_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
     # metrics:
