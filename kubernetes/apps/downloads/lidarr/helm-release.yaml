@@ -28,6 +28,14 @@ spec:
       tag: 1.2.6.3313
     env:
       TZ: "America/Los_Angeles"
+      LIDARR__INSTANCE_NAME: Lidarr
+      LIDARR__PORT: &port 80
+      LIDARR__LOG_LEVEL: info
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
