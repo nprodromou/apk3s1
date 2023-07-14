@@ -36,7 +36,7 @@ spec:
         sabnzbd.downloads.svc,
         sabnzbd.downloads.svc.cluster,
         sabnzbd.downloads.svc.cluster.local,
-        sabnzbd.${SECRET_PUBLIC_DOMAIN}
+        sabnzbd.${SECRET_DOMAIN}
     envFrom:
       - secretRef:
           name: *app
