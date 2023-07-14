@@ -97,6 +97,7 @@ spec:
           nfs:
             server: "${NAS_ADDR}"
             path: /Shares/Files/
+            fsGroup: "${SECRET_FS_GID}"
         mountPath: /Files
     resources:
       requests:
