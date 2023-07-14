@@ -2,49 +2,82 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: &app sabnzbd
   namespace: downloads
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: sabnzbd
-      version: 9.2.0
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    global:
+      nameOverride: *app
     image:
-      repository: ghcr.io/k8s-at-home/sabnzbd
-      tag: v3.4.1
-    env:
-      TZ: "America/Los_Angeles"
-      HOST_WHITELIST_ENTRIES: "sabnzbd.${SECRET_DOMAIN}, sabnzbd"
+      repository: ghcr.io/onedr0p/sabnzbd
+      tag: 4.0.3
+      TZ: "${TIMEZONE}"
+      SABNZBD__PORT: &port 80
+      SABNZBD__HOST_WHITELIST_ENTRIES: >-
+        sabnzbd,
+        sabnzbd.downloads,
+        sabnzbd.downloads.svc,
+        sabnzbd.downloads.svc.cluster,
+        sabnzbd.downloads.svc.cluster.local,
+        sabnzbd.${SECRET_PUBLIC_DOMAIN}
+    envFrom:
+      - secretRef:
+          name: *app
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          hajimari.io/enable: "true"
+          auth.home.arpa/enabled: "true"
           hajimari.io/icon: "download-box"
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
         hosts:
-          - host: "sabnzbd.${SECRET_DOMAIN}"
+          - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:
               - path: /
-            pathType: Prefix
+                pathType: Prefix
         tls:
           - hosts:
-              - "sabnzbd.${SECRET_DOMAIN}"
-            secretName: sabnzbd
+              - *host
+      api:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          hajimari.io/enable: "false"
+        hosts:
+          - host: *host
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     podSecurityContext:
       runAsUser: "${SECRET_UID}"
       runAsGroup: "${SECRET_GID}"
+      fsGroup: "${SECRET_FS_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
     persistence:
@@ -58,6 +91,7 @@ spec:
           nfs:
             server: "${NAS_ADDR}"
             path: /Shares/Files/
+            fsGroup: "${SECRET_FS_GID}"
         mountPath: /Files
     # podAnnotations:
     #   backup.velero.io/backup-volumes: config
