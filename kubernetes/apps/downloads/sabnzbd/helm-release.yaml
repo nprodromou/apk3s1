@@ -30,13 +30,7 @@ spec:
       tag: 4.0.3
       TZ: "${TIMEZONE}"
       SABNZBD__PORT: &port 8080
-      SABNZBD__HOST_WHITELIST_ENTRIES: >-
-        sabnzbd,
-        sabnzbd.downloads,
-        sabnzbd.downloads.svc,
-        sabnzbd.downloads.svc.cluster,
-        sabnzbd.downloads.svc.cluster.local,
-        sabnzbd.${SECRET_DOMAIN}
+      SABNZBD__HOST_WHITELIST_ENTRIES: "sabnzbd, sabnzbd.${SECRET_DOMAIN}"
     envFrom:
       - secretRef:
           name: *app
