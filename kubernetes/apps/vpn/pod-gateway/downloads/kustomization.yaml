@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: vpn
 resources:
   - ./secrets.sops.yaml
-  # - ./helmrelease.yaml
+  - ./helmrelease.yaml
   - ./network-policy.yaml
 labels:
   - pairs:
