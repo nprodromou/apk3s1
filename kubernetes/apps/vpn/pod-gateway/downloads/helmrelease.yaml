@@ -32,7 +32,7 @@ spec:
             tag: v3.35.0
         env:
           - name: VPN_SERVICE_PROVIDER
-            value: "${VPN_SERVICE_PROVIDER}"
+            value: mullvad
           - name: VPN_TYPE
             value: wireguard
           - name: VPN_INTERFACE
