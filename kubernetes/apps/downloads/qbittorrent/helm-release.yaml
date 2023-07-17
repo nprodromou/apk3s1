@@ -2,62 +2,90 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: qbittorrent
+  name: &app qbittorrent
   namespace: downloads
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: qbittorrent
-      version: 13.1.0
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s-charts
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
+    global:
+      nameOverride: *app
     image:
-      repository: ghcr.io/k8s-at-home/qbittorrent
-      tag: v4.3.9
-    env:
-      TZ: "America/Los_Angeles"
+      repository: ghcr.io/onedr0p/qbittorrent
+      tag: 4.5.4
     hostname: qbittorrent
     podAnnotations:
       setGateway: "true"
+    env:
+      TZ: "${TIMEZONE}"
+      QBITTORRENT__PORT: &port 80
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "cloud-download"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/icon: "download-network"
+          nginx.ingress.kubernetes.io/configuration-snippet: |
         hosts:
-          - host: "qbittorrent.${SECRET_DOMAIN}"
+          - host: &host-release "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: &host-custom "qb.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "qbittorrent.${SECRET_DOMAIN}"
-            secretName: qbittorrent
+              - *host-release
+              - *host-custom
       api:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          hajimari.io/enable: "false"
         hosts:
-          - host: "qbittorrent.${SECRET_DOMAIN}"
+          - host: *host-release
+            paths:
+              - path: /api
+                pathType: Prefix
+          - host: *host-custom
             paths:
               - path: /api
                 pathType: Prefix
         tls:
           - hosts:
-              - "qbittorrent.${SECRET_DOMAIN}"
-            secretName: qbittorrent
+              - *host-release
+              - *host-custom
+    podSecurityContext:
+      runAsUser: "${SECRET_UID}"
+      runAsGroup: "${SECRET_GID}"
+      fsUser: "${SECRET_FS_UID}"
+      fsGroup: "${SECRET_FS_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
+      supplementalGroups:
+        - 5010
     persistence:
       config:
         enabled: true
@@ -69,12 +97,9 @@ spec:
           nfs:
             server: "${NAS_ADDR}"
             path: /Shares/Files/
+            fsGroup: "${SECRET_FS_GID}"
+            fsUser: "${SECRET_FS_UID}"
         mountPath: /Files
-    podSecurityContext:
-      runAsUser: "${SECRET_UID}"
-      runAsGroup: "${SECRET_GID}"
-      supplementalGroups:
-        - 100
     resources:
       requests:
         cpu: 500m
