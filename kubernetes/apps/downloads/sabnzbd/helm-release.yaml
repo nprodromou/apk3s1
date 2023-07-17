@@ -61,19 +61,19 @@ spec:
         tls:
           - hosts:
               - *host
-      api:
-        enabled: true
-        ingressClassName: "nginx"
-        annotations:
-          hajimari.io/enable: "false"
-        hosts:
-          - host: *host
-            paths:
-              - path: /api
-                pathType: Prefix
-        tls:
-          - hosts:
-              - *host
+      # api:
+      #   enabled: true
+      #   ingressClassName: "nginx"
+      #   annotations:
+      #     hajimari.io/enable: "false"
+      #   hosts:
+      #     - host: *host
+      #       paths:
+      #         - path: /api
+      #           pathType: Prefix
+      #   tls:
+      #     - hosts:
+      #         - *host
     podSecurityContext:
       runAsUser: "${SECRET_UID}"
       runAsGroup: "${SECRET_GID}"
