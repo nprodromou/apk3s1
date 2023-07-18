@@ -2,67 +2,90 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: sonarr
+  name: &app sonarr
   namespace: downloads
 spec:
-  interval: 5m
+  interval: 15m
   chart:
     spec:
-      # renovate: registryUrl=https://k8s-at-home.com/charts/
-      chart: sonarr
-      version: 16.2.3
+      chart: app-template
+      version: 0.2.2
       sourceRef:
         kind: HelmRepository
-        name: k8s-at-home-charts
+        name: bjw-s
         namespace: flux-system
-      interval: 5m
+      interval: 15m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
   values:
     image:
-      repository: ghcr.io/k8s-at-home/sonarr
-      tag: v3.0.8.1507
+      repository: ghcr.io/onedr0p/sonarr
+      tag: 3.0.10.1567
     env:
       TZ: "America/Los_Angeles"
+      SONARR__INSTANCE_NAME: Sonarr
+      SONARR__PORT: &port 80
+      SONARR__LOG_LEVEL: info
+    service:
+      main:
+        ports:
+          http:
+            port: *port
     ingress:
       main:
         enabled: true
-        ingressClassName: "traefik"
+        ingressClassName: "nginx"
         annotations:
-          hajimari.io/enable: "true"
-          hajimari.io/icon: "television-box"
-          cert-manager.io/cluster-issuer: letsencrypt-production
-          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-rfc1918@kubernetescrd"
-          # traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare@kubernetescrd"
-          # traefik.ingress.kubernetes.io/router.middlewares: "networking-external-auth@kubernetescrd"
+          auth.home.arpa/enabled: "true"
+          hajimari.io/icon: "music-box"
         hosts:
-          - host: "sonarr.${SECRET_DOMAIN}"
+          - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "sonarr.${SECRET_DOMAIN}"
-            secretName: sonarr
+              - *host
+      api:
+        enabled: true
+        ingressClassName: "nginx"
+        annotations:
+          hajimari.io/enable: "false"
+        hosts:
+          - host: *host
+            paths:
+              - path: /api
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
     podSecurityContext:
       runAsUser: "${SECRET_UID}"
       runAsGroup: "${SECRET_GID}"
+      fsGroup: "${SECRET_FS_GID}"
+      fsGroupChangePolicy: "OnRootMismatch"
       supplementalGroups:
         - 100
-    metrics:
-      enabled: true
-      serviceMonitor:
-        interval: 3m
-        scrapeTimeout: 1m
-      prometheusRule:
-        enabled: true
-      exporter:
-        image:
-          repository: ghcr.io/onedr0p/exportarr
-          tag: v1.0.0
-        env:
-          port: 9794
-          additionalMetrics: true
-          unknownQueueItems: false
+    # metrics:
+    #   enabled: true
+    #   serviceMonitor:
+    #     interval: 3m
+    #     scrapeTimeout: 1m
+    #   prometheusRule:
+    #     enabled: true
+    #   exporter:
+    #     image:
+    #       repository: ghcr.io/onedr0p/exportarr
+    #       tag: v0.6.2
+    #     env:
+    #       port: 9794
+    #       additionalMetrics: true
+    #       unknownQueueItems: false
     persistence:
       config:
         enabled: true
@@ -74,10 +97,11 @@ spec:
           nfs:
             server: "${NAS_ADDR}"
             path: /Shares/Files/
+            fsGroup: "${SECRET_FS_GID}"
         mountPath: /Files
     resources:
       requests:
-        memory: 250Mi
-        cpu: 500m
+        memory: 500Mi
+        cpu: 1000m
       limits:
         memory: 1500Mi
