@@ -11,7 +11,7 @@ resources:
   # - overseerr
   - prowlarr
   - qbittorrent
-  # - radarr
+   - radarr
   # - radarr-uhd
   # - readarr
   - sabnzbd
