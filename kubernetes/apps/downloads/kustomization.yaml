@@ -9,8 +9,7 @@ resources:
   # - jellyfin
   - lidarr
   # - overseerr
-  # - plex
-  # - prowlarr
+  - prowlarr
   - qbittorrent
   # - radarr
   # - radarr-uhd
