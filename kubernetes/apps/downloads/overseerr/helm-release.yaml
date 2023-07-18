@@ -89,7 +89,7 @@ spec:
     persistence:
       config:
         enabled: true
-        path: /app/config
+        mountPath: /app/config
         existingClaim: overseerr-config-v1
       media:
         enabled: true
