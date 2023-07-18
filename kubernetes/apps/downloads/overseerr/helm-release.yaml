@@ -29,7 +29,7 @@ spec:
     env:
       TZ: "America/Los_Angeles"
       OVERSEERR__INSTANCE_NAME: Overseerr
-      OVERSEERR__PORT: &port 80
+      OVERSEERR__PORT: &port 5055
       OVERSEERR__LOG_LEVEL: info
     service:
       main:
