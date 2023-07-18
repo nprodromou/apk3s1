@@ -29,7 +29,7 @@ spec:
     env:
       TZ: "America/Los_Angeles"
       BAZARR__INSTANCE_NAME: Bazarr
-      BAZARR__PORT: &port 80
+      BAZARR__PORT: &port 6767
       BAZARR__LOG_LEVEL: info
     service:
       main:
