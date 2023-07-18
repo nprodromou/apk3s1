@@ -29,7 +29,7 @@ spec:
     env:
       TZ: "America/Los_Angeles"
       KAVITA__INSTANCE_NAME: Kavita
-      KAVITA__PORT: &port 80
+      KAVITA__PORT: &port 5000
       KAVITA__LOG_LEVEL: info
     service:
       main:
