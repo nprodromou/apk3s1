@@ -8,7 +8,7 @@ resources:
   # - doplarr
   # - jellyfin
   - lidarr
-  # - overseerr
+  - overseerr
   - prowlarr
   - qbittorrent
   - radarr
