@@ -24,8 +24,8 @@ spec:
       retries: 5
   values:
     image:
-      repository: ghcr.io/onedr0p/radarr
-      tag: 4.5.2.7388
+      repository: ghcr.io/onedr0p/radarr-develop
+      tag: 4.7.1.764
     env:
       TZ: "America/Los_Angeles"
       RADARR__INSTANCE_NAME: Radarr
