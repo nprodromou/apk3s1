@@ -7,5 +7,5 @@ resources:
   # - jellyfin
   - kavita
   - plex
-  # - tautulli
+  - tautulli
   - ./namespace.yaml
