@@ -28,14 +28,14 @@ spec:
       tag: 2.12.5
     env:
       TZ: "America/Los_Angeles"
-      # TAUTULLI__INSTANCE_NAME: Tautulli
-      # TAUTULLI__PORT: &port 8181
-      # TAUTULLI__LOG_LEVEL: info
+      TAUTULLI__INSTANCE_NAME: Tautulli
+      TAUTULLI__PORT: &port 8181
+      TAUTULLI__LOG_LEVEL: info
     service:
       main:
         ports:
           http:
-            port: &port 8181
+            port: *port
     ingress:
       main:
         enabled: true
