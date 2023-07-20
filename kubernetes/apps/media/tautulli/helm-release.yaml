@@ -75,10 +75,10 @@ spec:
         enabled: true
         existingClaim: tautulli-config-v1
         mountPath: /config
-      media:
-        enabled: true
-        type: custom
-        volumeSpec:
+      # media:
+      #   enabled: true
+      #   type: custom
+      #   volumeSpec:
         #   nfs:
         #     server: "${NAS_ADDR}"
         #     path: /Shares/Files/
