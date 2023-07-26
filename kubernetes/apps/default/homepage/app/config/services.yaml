@@ -1,18 +1,18 @@
 ---
 - Media:
-    - Plex Docker:
+    - Plex:
         href: https://plex.${SECRET_DOMAIN}
         icon: plex.png
         widget:
           type: plex
           url: http://plex:32400
           key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
-    - Tautulli Docker:
+    - Tautulli:
         href: https://tautulli.${SECRET_DOMAIN}
         icon: tautulli.png
         widget:
           type: tautulli
-          url: http://tautulli:8181
+          url: httpS://tautulli.${SECRET_DOMAIN}
           key: {{HOMEPAGE_VAR_TAUTULLI_TOKEN}}
     # - Tdarr:
     #     href: https://tdarr.${SECRET_DOMAIN}
