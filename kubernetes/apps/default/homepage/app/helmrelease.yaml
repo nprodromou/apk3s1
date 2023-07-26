@@ -79,6 +79,6 @@ spec:
         memory: 200M
       limits:
         memory: 400M
-    envFrom:
-      - secretRef:
-          name: homepage-secret
+    # envFrom:
+    #   - secretRef:
+    #       name: homepage-secret
