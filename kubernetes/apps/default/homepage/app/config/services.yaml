@@ -5,7 +5,7 @@
         icon: plex.png
         widget:
           type: plex
-          url: http://plex:32400
+          url: https://plex:32400
           key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
     - Tautulli:
         href: https://tautulli.${SECRET_DOMAIN}
