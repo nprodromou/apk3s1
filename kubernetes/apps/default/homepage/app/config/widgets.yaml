@@ -4,15 +4,15 @@
 #     cpu: true
 #     expanded: true
 #     memory: truehttps://github.com/walkxcode/dashboard-icons/blob/main/png/homepage.png?raw=true
-- logo:
-    icon: https://raw.githubusercontent.com/LilDrunkenSmurf/k3s-home-cluster/main/icons/lds-transparent.png
+# - logo:
+    # icon: https://raw.githubusercontent.com/LilDrunkenSmurf/k3s-home-cluster/main/icons/lds-transparent.png
 - search:
-    provider: [duckduckgo, google]
+    provider: [google]
     focus: false
     target: _blank
 - greeting:
     text_size: xl
-    text: "Howdy Hey!"
+    text: "Welcome!"
 - kubernetes:
     cluster:
       cpu: true
@@ -23,7 +23,7 @@
     nodes:
       cpu: true
       memory: true
-      show: false
+      show: true
       showLabel: true
 - openmeteo:
     label: Home
@@ -31,11 +31,11 @@
     longitude: ${LONGITUDE}
     units: metric
     cache: 5
-- longhorn:
-    expanded: false
-    total: true
-    labels: true
-    nodes: false
+# - rook-ceph:
+#     expanded: false
+#     total: true
+#     labels: true
+#     nodes: false
 - datetime:
     text_size: l
     format:
