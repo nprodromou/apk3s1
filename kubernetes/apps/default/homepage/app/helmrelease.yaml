@@ -23,7 +23,7 @@ spec:
       retries: 5
   values:
     controller:
-      replicas: 2
+      replicas: 1
       strategy: RollingUpdate
       annotations:
         reloader.stakater.com/auto: "true"
