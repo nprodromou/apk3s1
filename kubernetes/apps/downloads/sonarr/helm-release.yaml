@@ -41,8 +41,13 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          auth.home.arpa/enabled: "true"
-          hajimari.io/icon: "music-box"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: sonarr.png
+          gethomepage.dev/name: Sonarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/widget.type: sonarr
+          gethomepage.dev/widget.url: http://sonarr.downloads.svc.cluster.local
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_TOKEN}}"
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
