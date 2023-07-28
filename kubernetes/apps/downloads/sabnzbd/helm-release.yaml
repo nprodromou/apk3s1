@@ -51,8 +51,13 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          auth.home.arpa/enabled: "true"
-          hajimari.io/icon: "download-box"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: sabnzbd.png
+          gethomepage.dev/name: SABnzbd
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/widget.type: sabnzbd
+          gethomepage.dev/widget.url: http://sabnzbd.downloads.svc.cluster.local:8080
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SABNZBD_TOKEN}}"
         hosts:
           - host: &host "sabnzbd.${SECRET_DOMAIN}"
             paths:

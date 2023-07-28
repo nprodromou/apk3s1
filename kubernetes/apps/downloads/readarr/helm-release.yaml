@@ -41,8 +41,13 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          auth.home.arpa/enabled: "true"
-          hajimari.io/icon: "book"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: readarr.png
+          gethomepage.dev/name: Readarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/widget.type: readarr
+          gethomepage.dev/widget.url: http://readarr.downloads.svc.cluster.local
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_READARR_TOKEN}}"
         hosts:
           - host: &host "readarr.${SECRET_DOMAIN}"
             paths:

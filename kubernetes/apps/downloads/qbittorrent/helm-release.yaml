@@ -45,9 +45,14 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          auth.home.arpa/enabled: "true"
-          hajimari.io/icon: "download-network"
-          nginx.ingress.kubernetes.io/configuration-snippet: |
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: qbittorrent.png
+          gethomepage.dev/name: qBittorrent
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/widget.type: qbittorrent
+          gethomepage.dev/widget.url: http://qbittorrent.downloads.svc.cluster.local:8080
+          gethomepage.dev/widget.username: "{{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}"
+          gethomepage.dev/widget.password: "{{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}"
         hosts:
           - host: &host "qb.${SECRET_DOMAIN}"
             paths:

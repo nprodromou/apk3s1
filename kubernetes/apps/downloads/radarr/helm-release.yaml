@@ -41,8 +41,13 @@ spec:
         enabled: true
         ingressClassName: "nginx"
         annotations:
-          auth.home.arpa/enabled: "true"
-          hajimari.io/icon: "movie-box"
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/icon: radarr.png
+          gethomepage.dev/name: Radarr
+          gethomepage.dev/group: Downloads
+          gethomepage.dev/widget.type: radarr
+          gethomepage.dev/widget.url: http://radarr.downloads.svc.cluster.local
+          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_RADARR_TOKEN}}"
         hosts:
           - host: &host "radarr.${SECRET_DOMAIN}"
             paths:
