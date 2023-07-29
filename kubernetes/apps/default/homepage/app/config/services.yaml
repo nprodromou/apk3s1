@@ -12,7 +12,7 @@
         icon: tautulli.png
         widget:
           type: tautulli
-          url: https://tautulli.${SECRET_DOMAIN}
+          url: http://tautulli.media.svc.cluster.local:8181
           key: "${HOMEPAGE_VAR_TAUTULLI_TOKEN}"
     # - Tdarr:
     #     href: https://tdarr.${SECRET_DOMAIN}
@@ -40,7 +40,7 @@
         description: Pi Hole
         widget:
           type: pihole
-          url: http://${PI_IP}/admin
+          url: http://${PI_IP}
           key: "${HOMEPAGE_VAR_PIHOLE_TOKEN}"
     # - Portainer:
     #     href: https://portainer.${SECRET_DOMAIN}
