@@ -7,13 +7,13 @@
           type: plex
           url: http://plex.media.svc.cluster.local:32400
           key: "${HOMEPAGE_VAR_PLEX_TOKEN}"
-    - Tautulli:
-        href: https://tautulli.${SECRET_DOMAIN}
-        icon: tautulli.png
-        widget:
-          type: tautulli
-          url: http://tautulli.media.svc.cluster.local:8181
-          key: "${HOMEPAGE_VAR_TAUTULLI_TOKEN}"
+    # - Tautulli:
+    #     href: https://tautulli.${SECRET_DOMAIN}
+    #     icon: tautulli.png
+    #     widget:
+    #       type: tautulli
+    #       url: http://tautulli.media.svc.cluster.local:8181
+    #       key: "${HOMEPAGE_VAR_TAUTULLI_TOKEN}"
     # - Tdarr:
     #     href: https://tdarr.${SECRET_DOMAIN}
     #     icon: tdarr.png
