@@ -47,7 +47,7 @@ spec:
           gethomepage.dev/group: Downloads
           gethomepage.dev/widget.type: sonarr
           gethomepage.dev/widget.url: http://sonarr.downloads.svc.cluster.local
-          gethomepage.dev/widget.key: "{HOMEPAGE_VAR_SONARR_TOKEN}"
+          gethomepage.dev/widget.key: "${HOMEPAGE_VAR_SONARR_TOKEN}"
         hosts:
           - host: &host "sonarr.${SECRET_DOMAIN}"
             paths:
