@@ -47,7 +47,7 @@ spec:
           gethomepage.dev/group: Downloads
           gethomepage.dev/widget.type: readarr
           gethomepage.dev/widget.url: http://readarr.downloads.svc.cluster.local
-          gethomepage.dev/widget.key: "{HOMEPAGE_VAR_READARR_TOKEN}"
+          gethomepage.dev/widget.key: "${HOMEPAGE_VAR_READARR_TOKEN}"
         hosts:
           - host: &host "readarr.${SECRET_DOMAIN}"
             paths:
