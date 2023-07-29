@@ -47,7 +47,7 @@ spec:
           gethomepage.dev/group: Downloads
           gethomepage.dev/widget.type: radarr
           gethomepage.dev/widget.url: http://radarr.downloads.svc.cluster.local
-          gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_RADARR_TOKEN}}"
+          gethomepage.dev/widget.key: "{HOMEPAGE_VAR_RADARR_TOKEN}"
         hosts:
           - host: &host "radarr.${SECRET_DOMAIN}"
             paths:
