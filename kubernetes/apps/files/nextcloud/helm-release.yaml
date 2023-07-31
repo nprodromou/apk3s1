@@ -25,7 +25,7 @@ spec:
   values:
     image:
       repository: ghcr.io/linuxserver/nextcloud
-      tag: 27.0.1-ls260
+      tag: 27.0.1
     env:
       TZ: "America/Los_Angeles"
       NEXTCLOUD__INSTANCE_NAME: NextCloud
