@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nextcloud-data-v1
+  name: nextcloud-config-v1
   namespace: files
   labels:
     kasten.io/backup-volume: "enabled"
@@ -11,5 +11,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2048Gi
+      storage: 10Gi
   storageClassName: ceph-block
