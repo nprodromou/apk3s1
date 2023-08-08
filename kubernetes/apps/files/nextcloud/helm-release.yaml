@@ -20,9 +20,9 @@ spec:
     createNamespace: true
     remediation:
       retries: 5
-  upgrade:
-    remediation:
-      retries: 5
+  # upgrade:
+  #   remediation:
+  #     retries: 5
   # values:
   #   image:
   #     repository: ghcr.io/linuxserver/nextcloud
