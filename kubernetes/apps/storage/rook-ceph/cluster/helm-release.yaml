@@ -32,6 +32,7 @@ spec:
       enabled: true
       urlPrefix: /
       ssl: false
+      port: 80
     ingress:
       enabled: true
       dashboard:
