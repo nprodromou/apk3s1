@@ -57,29 +57,29 @@ spec:
         - hosts:
             - "nextcloud.${SECRET_DOMAIN}"
       secretName: nextcloud
-    nextcloud:
-      host: "nextcloud.${SECRET_DOMAIN}"
-      # username: "${SECRET_NEXTCLOUD_USERNAME}"
-      password: "${SECRET_NEXTCLOUD_PASSWORD}"
-      mail:
-        enabled: true
-        domain: "${SECRET_DOMAIN}"
-        smtp:
-          host: "smtp.sendgrid.net"
-          secure: ssl
-          authtype: LOGIN
-      extraVolumes:
-        - name: nfs-files
-          nfs:
-            server: "${NAS_ADDR}"
-            path: /Shares/Files/
-            readOnly: true
-      extraVolumeMounts:
-        - name: nfs-files
-          mountPath: /mnt/Files
-      extraEnv:
-      # overwriteprotocol: https
-      # overwrite.cli.url: "nextcloud.${SECRET_DOMAIN}"
+  nextcloud:
+    host: "nextcloud.${SECRET_DOMAIN}"
+    # username: "${SECRET_NEXTCLOUD_USERNAME}"
+    password: "${SECRET_NEXTCLOUD_PASSWORD}"
+    mail:
+      enabled: true
+      domain: "${SECRET_DOMAIN}"
+      smtp:
+        host: "smtp.sendgrid.net"
+        secure: ssl
+        authtype: LOGIN
+    extraVolumes:
+      - name: nfs-files
+        nfs:
+          server: "${NAS_ADDR}"
+          path: /Shares/Files/
+          readOnly: true
+    extraVolumeMounts:
+      - name: nfs-files
+        mountPath: /mnt/Files
+    extraEnv:
+    # overwriteprotocol: https
+    # overwrite.cli.url: "nextcloud.${SECRET_DOMAIN}"
     podSecurityContext:
       runAsUser: "${SECRET_UID}"
       runAsGroup: "${SECRET_GID}"
