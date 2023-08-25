@@ -6,6 +6,6 @@ resources:
   # - calibre-web
   # - jellyfin
   - kavita
-  - plex
+  # - plex
   - tautulli
   - ./namespace.yaml
