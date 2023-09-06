@@ -23,7 +23,7 @@ spec:
     env:
       TZ: "America/Los_Angeles"
       ADVERTISE_IP: "http://plex.${SECRET_DOMAIN}:32400"
-      ALLOWED_NETWORKS: "10.0.0.0/8"
+      ALLOWED_NETWORKS: "0.0.0.0/0"
     service:
       main:
         type: LoadBalancer
