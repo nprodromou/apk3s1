@@ -72,7 +72,7 @@ spec:
             server: "${NAS_ADDR}"
             path: /Shares/Files/
         mountPath: /Files
-        readOnly: true
+        readOnly: false
       transcode:
         enabled: true
         type: emptyDir
